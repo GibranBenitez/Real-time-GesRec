@@ -5,7 +5,7 @@ import glob
 import sys
 from subprocess import call
 
-dataset_path = "/data2/nvGesture"
+dataset_path = "/misc/dl001/dataset/NVIDIA/nvgesture_arch"
 def load_split_nvgesture(file_with_split = './nvgesture_train_correct.lst',list_split = list()):
     file_with_split = os.path.join(dataset_path,file_with_split)
     params_dictionary = dict()
@@ -104,12 +104,16 @@ def extract_frames(sensors=["color", "depth"]):
        
     
 if __name__ == "__main__":
-    sensors = ["color", "depth"]
-    subset = sys.argv[1]
-    file_name = sys.argv[2]
-    class_types = sys.argv[3]
+    # sensors = ["color", "depth"]
+    # subset = sys.argv[1]          # [training, validation] 
+    # file_name = sys.argv[2]       # [trainlistall.txt, trainlistall_but_None.txt, trainlistbinary.txt, vallistall.txt, ...]
+    # class_types = sys.argv[3]     # [all, all_but_None, binary]
 
     sensors = ["color"]
+    subset = "training" 
+    file_name = "trainlistbinaryrgb.txt"
+    class_types = "binary"
+
     file_lists = dict()
     if subset == 'training':
         file_list = "./nvgesture_train_correct_cvpr2016_v2.lst"

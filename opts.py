@@ -170,6 +170,11 @@ def parse_opts_offline():
         type=str, 
         help='Pretrained model (.pth)')
     parser.add_argument(
+        '--pretrain_dataset', 
+        default='', 
+        type=str, 
+        help='dataset from pretrained model')
+    parser.add_argument(
         '--ft_begin_index',
         default=0,
         type=int,

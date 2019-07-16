@@ -64,8 +64,10 @@ def generate_model(opt):
             print('loading pretrained model {}'.format(opt.pretrain_path))
             pretrain = torch.load(opt.pretrain_path)
             assert opt.arch == pretrain['arch']
-
-            model.load_state_dict(pretrain['state_dict'])
+            if opt.pretrain_dataset == 'jester':
+                del pretrain['state_dict']['module.fc.weight']
+                del pretrain['state_dict']['module.fc.bias']
+                model.load_state_dict(pretrain['state_dict'],strict=False)
 
         if opt.modality == 'RGB' and opt.model != 'c3d':
             print("[INFO]: RGB model is used for init model")
@@ -73,6 +75,8 @@ def generate_model(opt):
         elif opt.modality == 'Depth':
             print("[INFO]: Converting the pretrained model to Depth init model")
             model = _construct_depth_model(model)
+            if opt.pretrain_dataset == opt.dataset:
+                model.load_state_dict(pretrain['state_dict'])
             print("[INFO]: Done. Flow model ready.")
         elif opt.modality == 'RGB-D':
             print("[INFO]: Converting the pretrained model to RGB+D init model")

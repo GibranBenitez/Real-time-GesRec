@@ -3,6 +3,7 @@ import sys
 import json
 import numpy as np
 import torch
+import shutil
 from torch import nn
 from torch import optim
 from torch.optim import lr_scheduler
@@ -34,6 +35,7 @@ def adjust_learning_rate(optimizer, epoch, lr_steps):
         param_group['lr'] = lr_new
 
 best_prec1 = 0
+ep_best = 0
 
 if __name__ == '__main__':
     opt = parse_opts_offline()
@@ -54,10 +56,11 @@ if __name__ == '__main__':
     for i in range(1, opt.n_scales):
         opt.scales.append(opt.scales[-1] * opt.scale_step)
     opt.arch = '{}-{}'.format(opt.model, opt.model_depth)
+    opt.store_name = '{}_{}'.format(opt.store_name, opt.arch)
     opt.mean = get_mean(opt.norm_value)
     opt.std = get_std(opt.norm_value)
     print(opt)
-    with open(os.path.join(opt.result_path, 'opts.json'), 'w') as opt_file:
+    with open(os.path.join(opt.result_path, 'opts_{}.json'.format(opt.store_name)), 'w') as opt_file:
         json.dump(vars(opt), opt_file)
 
     torch.manual_seed(opt.manual_seed)
@@ -118,10 +121,10 @@ if __name__ == '__main__':
             num_workers=opt.n_threads,
             pin_memory=True)
         train_logger = Logger(
-            os.path.join(opt.result_path, 'train.log'),
+            os.path.join(opt.result_path, 'train_{}.log'.format(opt.store_name)),
             ['epoch', 'loss', 'acc', 'precision','recall','lr'])
         train_batch_logger = Logger(
-            os.path.join(opt.result_path, 'train_batch.log'),
+            os.path.join(opt.result_path, 'train_batch_{}.log'.format(opt.store_name)),
             ['epoch', 'batch', 'iter', 'loss', 'acc', 'precision', 'recall', 'lr'])
 
         if opt.nesterov:
@@ -156,20 +159,21 @@ if __name__ == '__main__':
             num_workers=opt.n_threads,
             pin_memory=True)
         val_logger = Logger(
-            os.path.join(opt.result_path, 'val.log'), 
+            os.path.join(opt.result_path, 'val_{}.log'.format(opt.store_name)), 
             ['epoch', 'loss', 'acc','precision', 'recall'])
 
     if opt.resume_path:
         print('loading checkpoint {}'.format(opt.resume_path))
         checkpoint = torch.load(opt.resume_path)
         assert opt.arch == checkpoint['arch']
-
+        pdb.set_trace()
         opt.begin_epoch = checkpoint['epoch']
         model.load_state_dict(checkpoint['state_dict'])
         if not opt.no_train:
             optimizer.load_state_dict(checkpoint['optimizer'])
 
     print('run')
+    # pdb.set_trace()
     for i in range(opt.begin_epoch, opt.n_epochs + 1):
         if not opt.no_train:
             adjust_learning_rate(optimizer, i, opt.lr_steps)
@@ -178,7 +182,10 @@ if __name__ == '__main__':
         if not opt.no_val:
             validation_loss, prec1 = val_epoch(i, val_loader, model, criterion, opt,
                                         val_logger)
+            print('     Valid acc: {}  ({}, ep: {})'.format(prec1,best_prec1,ep_best))
             is_best = prec1 > best_prec1
+            if is_best:
+                ep_best = i
             best_prec1 = max(prec1, best_prec1)
             state = {
                 'epoch': i,
@@ -188,7 +195,6 @@ if __name__ == '__main__':
                 'best_prec1': best_prec1
                 }
             save_checkpoint(state, is_best)
-
         # if not opt.no_train and not opt.no_val:
         #     scheduler.step(validation_loss)
 

@@ -1,0 +1,3663 @@
+Namespace(annotation_path='/misc/dl001/bega/Real-time-GesRec/annotation_nvGesture/nvall.json', arch='resnetl-10', batch_size=1, begin_epoch=1, checkpoint=1, clf_queue_size=16, clf_strategy='median', clf_threshold_final=0.15, clf_threshold_pre=0.6, crop_position_in_test='c', dampening=0.9, dataset='nv', det_counter=2.0, det_queue_size=4, det_strategy='median', ft_begin_index=0, initial_scale=1.0, learning_rate=0.1, lr_patience=10, lr_steps=[10, 20, 30, 40, 100], manual_seed=1, mean=[114.7748, 107.7354, 99.475], mean_dataset='activitynet', modality='Depth', modality_clf='Depth', modality_det='Depth', model='resnetl', model_clf='resnext', model_depth=10, model_depth_clf=101, model_depth_det=10, model_det='resnetl', momentum=0.9, n_classes=2, n_classes_clf=25, n_classes_det=2, n_epochs=200, n_finetune_classes=2, n_finetune_classes_clf=25, n_finetune_classes_det=2, n_scales=5, n_threads=16, n_val_samples=1, nesterov=False, no_cuda=False, no_hflip=False, no_mean_norm=False, no_softmax_in_test=False, no_train=False, no_val=False, norm_value=1, optimizer='sgd', pretrain_path='', pretrain_path_clf='', pretrain_path_det='', resnet_shortcut='A', resnet_shortcut_clf='B', resnet_shortcut_det='A', resnext_cardinality=32, resnext_cardinality_clf=32, resnext_cardinality_det=32, result_path='/misc/dl001/bega/Real-time-GesRec/results', resume_path='/misc/dl001/bega/Real-time-GesRec/report/nv_resnetl_10_Depth_8.pth', resume_path_clf='bega/Real-time-GesRec/report/nv_resnext_101_Depth_32.pth', resume_path_det='bega/Real-time-GesRec/report/nv_resnetl_10_Depth_8.pth', root_path='/misc/dl001/', sample_duration=8, sample_duration_clf=32, sample_duration_det=8, sample_size=112, scale_in_test=1.0, scale_step=0.84089641525, scales=[1.0, 0.84089641525, 0.7071067811803005, 0.5946035574934808, 0.4999999999911653], std=[38.7568578, 37.88248729, 40.02898126], std_norm=False, store_name='model', stride_len=1, test=True, test_subset='test', train_crop='random', video_path='/misc/dl001/dataset/NVIDIA/nvgesture_arch', weight_decay=0.001, whole_path='video_kinetics_jpg', wide_resnet_k=2, wide_resnet_k_clf=2, wide_resnet_k_det=2)
+[INFO]: Converting the pretrained model to Depth init model
+[INFO]: Done. Flow model ready.
+loading checkpoint /misc/dl001/bega/Real-time-GesRec/report/nv_resnetl_10_Depth_8.pth
+Model 1 
+ DataParallel(
+  (module): ResNetL(
+    (conv1): Conv3d(1, 16, kernel_size=(7, 7, 7), stride=(1, 2, 2), padding=(3, 3, 3), bias=False)
+    (bn1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace)
+    (maxpool): MaxPool3d(kernel_size=(3, 3, 3), stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (conv2): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (bn2): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv3d(16, 32, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (conv2): Conv3d(32, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (bn2): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (conv2): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (bn2): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (conv2): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (bn2): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (avgpool): AvgPool3d(kernel_size=(1, 4, 4), stride=1, padding=0)
+    (fc): Linear(in_features=128, out_features=2, bias=True)
+  )
+)
+Total number of trainable parameters:  891474
+Namespace(annotation_path='/misc/dl001/bega/Real-time-GesRec/annotation_nvGesture/nvall.json', arch='resnext-101', batch_size=1, begin_epoch=1, checkpoint=1, clf_queue_size=16, clf_strategy='median', clf_threshold_final=0.15, clf_threshold_pre=0.6, crop_position_in_test='c', dampening=0.9, dataset='nv', det_counter=2.0, det_queue_size=4, det_strategy='median', ft_begin_index=0, initial_scale=1.0, learning_rate=0.1, lr_patience=10, lr_steps=[10, 20, 30, 40, 100], manual_seed=1, mean=[114.7748, 107.7354, 99.475], mean_dataset='activitynet', modality='Depth', modality_clf='Depth', modality_det='Depth', model='resnext', model_clf='resnext', model_depth=101, model_depth_clf=101, model_depth_det=10, model_det='resnetl', momentum=0.9, n_classes=25, n_classes_clf=25, n_classes_det=2, n_epochs=200, n_finetune_classes=25, n_finetune_classes_clf=25, n_finetune_classes_det=2, n_scales=5, n_threads=16, n_val_samples=1, nesterov=False, no_cuda=False, no_hflip=False, no_mean_norm=False, no_softmax_in_test=False, no_train=False, no_val=False, norm_value=1, optimizer='sgd', pretrain_path='', pretrain_path_clf='', pretrain_path_det='', resnet_shortcut='B', resnet_shortcut_clf='B', resnet_shortcut_det='A', resnext_cardinality=32, resnext_cardinality_clf=32, resnext_cardinality_det=32, result_path='/misc/dl001/bega/Real-time-GesRec/results', resume_path='/misc/dl001/bega/Real-time-GesRec/report/nv_resnext_101_Depth_32.pth', resume_path_clf='bega/Real-time-GesRec/report/nv_resnext_101_Depth_32.pth', resume_path_det='bega/Real-time-GesRec/report/nv_resnetl_10_Depth_8.pth', root_path='/misc/dl001/', sample_duration=32, sample_duration_clf=32, sample_duration_det=8, sample_size=112, scale_in_test=1.0, scale_step=0.84089641525, scales=[1.0, 0.84089641525, 0.7071067811803005, 0.5946035574934808, 0.4999999999911653], std=[38.7568578, 37.88248729, 40.02898126], std_norm=False, store_name='model', stride_len=1, test=True, test_subset='test', train_crop='random', video_path='/misc/dl001/dataset/NVIDIA/nvgesture_arch', weight_decay=0.001, whole_path='video_kinetics_jpg', wide_resnet_k=2, wide_resnet_k_clf=2, wide_resnet_k_det=2)
+[INFO]: Converting the pretrained model to Depth init model
+[INFO]: Done. Flow model ready.
+loading checkpoint /misc/dl001/bega/Real-time-GesRec/report/nv_resnext_101_Depth_32.pth
+Model 2 
+ DataParallel(
+  (module): ResNeXt(
+    (conv1): Conv3d(1, 64, kernel_size=(7, 7, 7), stride=(1, 2, 2), padding=(3, 3, 3), bias=False)
+    (bn1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace)
+    (maxpool): MaxPool3d(kernel_size=(3, 3, 3), stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): ResNeXtBottleneck(
+        (conv1): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (downsample): Sequential(
+          (0): Conv3d(64, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (1): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): ResNeXtBottleneck(
+        (conv1): Conv3d(256, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (2): ResNeXtBottleneck(
+        (conv1): Conv3d(256, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+    )
+    (layer2): Sequential(
+      (0): ResNeXtBottleneck(
+        (conv1): Conv3d(256, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(256, 256, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (downsample): Sequential(
+          (0): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(2, 2, 2), bias=False)
+          (1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): ResNeXtBottleneck(
+        (conv1): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(256, 256, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (2): ResNeXtBottleneck(
+        (conv1): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(256, 256, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (3): ResNeXtBottleneck(
+        (conv1): Conv3d(512, 256, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(256, 256, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+    )
+    (layer3): Sequential(
+      (0): ResNeXtBottleneck(
+        (conv1): Conv3d(512, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (downsample): Sequential(
+          (0): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(2, 2, 2), bias=False)
+          (1): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (2): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (3): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (4): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (5): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (6): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (7): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (8): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (9): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (10): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (11): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (12): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (13): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (14): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (15): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (16): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (17): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (18): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (19): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (20): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (21): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (22): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 512, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(512, 512, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+    )
+    (layer4): Sequential(
+      (0): ResNeXtBottleneck(
+        (conv1): Conv3d(1024, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(1024, 1024, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(1024, 2048, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+        (downsample): Sequential(
+          (0): Conv3d(1024, 2048, kernel_size=(1, 1, 1), stride=(2, 2, 2), bias=False)
+          (1): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): ResNeXtBottleneck(
+        (conv1): Conv3d(2048, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(1024, 1024, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(1024, 2048, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+      (2): ResNeXtBottleneck(
+        (conv1): Conv3d(2048, 1024, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn1): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv3d(1024, 1024, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), groups=32, bias=False)
+        (bn2): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv3d(1024, 2048, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        (bn3): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace)
+      )
+    )
+    (avgpool): AvgPool3d(kernel_size=(2, 4, 4), stride=1, padding=0)
+    (fc): Linear(in_features=2048, out_features=25, bias=True)
+  )
+)
+Total number of trainable parameters:  47528537
+Start Evaluation
+[1/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+/misc/dl001/bega/Real-time-GesRec/models/resnext.py:121: UserWarning: nn.init.kaiming_normal is now deprecated in favor of nn.init.kaiming_normal_.
+  m.weight = nn.init.kaiming_normal(m.weight, mode='fan_out')
+Late Detected - class : 0 with prob : 0.45015827608442044 at frame 231
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[2/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.45023528536291907 at frame 217
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[3/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.5392953105263758 at frame 181
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[4/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.3662766299264523 at frame 217
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[5/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.3885152935099919 at frame 207
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[6/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.4623232922731949 at frame 209
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[7/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.19633927979827875 at frame 190
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[8/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.24940258948192354 at frame 185
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[9/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.2293456998550692 at frame 185
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (1.0)
+[10/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.26706754713078745 at frame 199
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (1.0)
+[11/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.38670942353695775 at frame 171
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[12/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.4125837491747531 at frame 169
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[13/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.49393824131918374 at frame 181
+predicted classes: 	 [0]
+True classes :		 [0]
+Levenshtein Accuracy = 1.0 (1.0)
+[14/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.2123529607759957 at frame 167
+predicted classes: 	 [5]
+True classes :		 [0]
+Levenshtein Accuracy = 0.0 (0.9285714285714286)
+[15/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.2122967437593 at frame 165
+predicted classes: 	 [18]
+True classes :		 [0]
+Levenshtein Accuracy = 0.0 (0.8666666666666667)
+[16/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_01/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.24678315890449665 at frame 161
+predicted classes: 	 [18]
+True classes :		 [0]
+Levenshtein Accuracy = 0.0 (0.8125)
+[17/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.6480070541239542 at frame 225
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.8235294117647058)
+[18/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [1]
+Levenshtein Accuracy = 0 (0.7777777777777778)
+[19/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.6575990134899554 at frame 215
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7894736842105263)
+[20/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.626701771893208 at frame 232
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.8)
+[21/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [1]
+Levenshtein Accuracy = 0 (0.7619047619047619)
+[22/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.19905007769699815 at frame 106
+Late Detected - class : 1 with prob : 0.5691181036834446 at frame 179
+predicted classes: 	 [17  1]
+True classes :		 [1]
+Levenshtein Accuracy = 0.0 (0.7272727272727273)
+[23/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [1]
+Levenshtein Accuracy = 0 (0.6956521739130435)
+[24/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.5221626684586791 at frame 198
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7083333333333334)
+[25/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [1]
+Levenshtein Accuracy = 0 (0.68)
+[26/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 1 with prob : 0.6911901551725177 at frame 234
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.6923076923076923)
+[27/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [1]
+Levenshtein Accuracy = 0 (0.6666666666666666)
+[28/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.2186634790228951 at frame 184
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.6785714285714286)
+[29/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.26019251005238814 at frame 219
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.6896551724137931)
+[30/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.4117597044905161 at frame 184
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7)
+[31/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 1 with prob : 0.6450471166785741 at frame 200
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7096774193548387)
+[32/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 1 with prob : 0.6348311161811608 at frame 196
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.71875)
+[33/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.6387291786666749 at frame 202
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7272727272727273)
+[34/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.39571180961997005 at frame 197
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7352941176470589)
+[35/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.5653983000181917 at frame 206
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.7428571428571429)
+[36/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.49328363726768987 at frame 191
+predicted classes: 	 [1]
+True classes :		 [1]
+Levenshtein Accuracy = 1.0 (0.75)
+[37/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.3072009591934878 at frame 237
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.7567567567567568)
+[38/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.7368421052631579)
+[39/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.4656003226329744 at frame 234
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.7435897435897436)
+[40/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.3216083055331708 at frame 238
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.75)
+[41/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.7317073170731707)
+[42/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.26660944120541874 at frame 186
+predicted classes: 	 [3]
+True classes :		 [2]
+Levenshtein Accuracy = 0.0 (0.7142857142857143)
+[43/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.6976744186046512)
+[44/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.17220170876649626 at frame 229
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.7045454545454546)
+[45/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.3107422094100078 at frame 52
+predicted classes: 	 [11]
+True classes :		 [2]
+Levenshtein Accuracy = 0.0 (0.6888888888888889)
+[46/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.4042693147139849 at frame 58
+predicted classes: 	 [15]
+True classes :		 [2]
+Levenshtein Accuracy = 0.0 (0.6739130434782609)
+[47/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.6595744680851063)
+[48/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.2703702452522321 at frame 193
+predicted classes: 	 [3]
+True classes :		 [2]
+Levenshtein Accuracy = 0.0 (0.6458333333333334)
+[49/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.6326530612244898)
+[50/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [2]
+Levenshtein Accuracy = 0 (0.62)
+[51/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.39865074421511454 at frame 202
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6274509803921569)
+[52/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 2 with prob : 0.6381341440038707 at frame 210
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6346153846153846)
+[53/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.47536399975764493 at frame 225
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6415094339622641)
+[54/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.2909288669905259 at frame 202
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6481481481481481)
+[55/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.33586606934164936 at frame 209
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6545454545454545)
+[56/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_03/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.43631077170552346 at frame 213
+predicted classes: 	 [2]
+True classes :		 [2]
+Levenshtein Accuracy = 1.0 (0.6607142857142857)
+[57/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.3911638962613931 at frame 223
+predicted classes: 	 [16]
+True classes :		 [3]
+Levenshtein Accuracy = 0.0 (0.6491228070175439)
+[58/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.6379310344827587)
+[59/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.33727387151998467 at frame 49
+predicted classes: 	 [21]
+True classes :		 [3]
+Levenshtein Accuracy = 0.0 (0.6271186440677966)
+[60/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.5841428569592453 at frame 232
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.6333333333333333)
+[61/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.6229508196721312)
+[62/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.6129032258064516)
+[63/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.3572213333737697 at frame 168
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.6190476190476191)
+[64/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.609375)
+[65/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.36286394522849064 at frame 216
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.6153846153846154)
+[66/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.6060606060606061)
+[67/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.5970149253731343)
+[68/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.5882352941176471)
+[69/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.16604753091845376 at frame 185
+predicted classes: 	 [22]
+True classes :		 [3]
+Levenshtein Accuracy = 0.0 (0.5797101449275363)
+[70/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.37896445066629625 at frame 187
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.5857142857142857)
+[71/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [3]
+Levenshtein Accuracy = 0 (0.5774647887323944)
+[72/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 3 with prob : 0.6412301586433415 at frame 204
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.5833333333333334)
+[73/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.5460530026504526 at frame 213
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.589041095890411)
+[74/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.5452175865515109 at frame 206
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.5945945945945946)
+[75/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.22638241507729107 at frame 199
+predicted classes: 	 [7]
+True classes :		 [3]
+Levenshtein Accuracy = 0.0 (0.5866666666666667)
+[76/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.2681309550384169 at frame 192
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.5921052631578947)
+[77/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_04/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.31408988312097585 at frame 190
+predicted classes: 	 [3]
+True classes :		 [3]
+Levenshtein Accuracy = 1.0 (0.5974025974025974)
+[78/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.4531318133489569 at frame 198
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.6025641025641025)
+[79/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.4346533755221259 at frame 207
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.6075949367088608)
+[80/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.3169221830869318 at frame 199
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.6125)
+[81/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 4 with prob : 0.6167625314109946 at frame 112
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.6172839506172839)
+[82/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.43851148250340594 at frame 214
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.6219512195121951)
+[83/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [4]
+Levenshtein Accuracy = 0 (0.6144578313253012)
+[84/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.17861882961400644 at frame 171
+predicted classes: 	 [6]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.6071428571428571)
+[85/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [4]
+Levenshtein Accuracy = 0 (0.6)
+[86/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.2838323364151613 at frame 125
+Late Detected - class : 4 with prob : 0.18616882407445606 at frame 196
+predicted classes: 	 [6 4]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5930232558139535)
+[87/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [4]
+Levenshtein Accuracy = 0 (0.5862068965517241)
+[88/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.2855484102599735 at frame 166
+predicted classes: 	 [7]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5795454545454546)
+[89/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.26240225518110005 at frame 150
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.5842696629213483)
+[90/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.3421704056195446 at frame 181
+predicted classes: 	 [20]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5777777777777777)
+[91/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.23576782766111373 at frame 187
+predicted classes: 	 [20]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5714285714285714)
+[92/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.5946917504039844 at frame 211
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.5760869565217391)
+[93/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.25409557048852394 at frame 174
+Late Detected - class : 19 with prob : 0.27359667718607067 at frame 228
+predicted classes: 	 [20 19]
+True classes :		 [4]
+Levenshtein Accuracy = -1.0 (0.5591397849462365)
+[94/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.24524723657691436 at frame 171
+predicted classes: 	 [5]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5531914893617021)
+[95/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.17844713972413762 at frame 202
+predicted classes: 	 [20]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5473684210526316)
+[96/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.3544821313476122 at frame 192
+predicted classes: 	 [4]
+True classes :		 [4]
+Levenshtein Accuracy = 1.0 (0.5520833333333334)
+[97/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_05/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.21373089271617704 at frame 191
+predicted classes: 	 [20]
+True classes :		 [4]
+Levenshtein Accuracy = 0.0 (0.5463917525773195)
+[98/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.6218282914867173 at frame 222
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5510204081632653)
+[99/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [5]
+Levenshtein Accuracy = 0 (0.5454545454545454)
+[100/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.42870807115872644 at frame 233
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.55)
+[101/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.20353663017464071 at frame 227
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5544554455445545)
+[102/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.40701051915339803 at frame 229
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5588235294117647)
+[103/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.36607346131353546 at frame 186
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5631067961165048)
+[104/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.3143676711421829 at frame 177
+predicted classes: 	 [4]
+True classes :		 [5]
+Levenshtein Accuracy = 0.0 (0.5576923076923077)
+[105/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.38745219924186075 at frame 188
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5619047619047619)
+[106/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [5]
+Levenshtein Accuracy = 0 (0.5566037735849056)
+[107/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [5]
+Levenshtein Accuracy = 0 (0.5514018691588785)
+[108/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 5 with prob : 0.6716586245917721 at frame 236
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5555555555555556)
+[109/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.25193890813975933 at frame 175
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5596330275229358)
+[110/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5624205752406516 at frame 176
+predicted classes: 	 [19]
+True classes :		 [5]
+Levenshtein Accuracy = 0.0 (0.5545454545454546)
+[111/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.4098391025622426 at frame 135
+predicted classes: 	 [19]
+True classes :		 [5]
+Levenshtein Accuracy = 0.0 (0.5495495495495496)
+[112/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.5680033500581081 at frame 217
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5535714285714286)
+[113/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.5743136974802867 at frame 214
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5575221238938053)
+[114/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.5762981763589881 at frame 198
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5614035087719298)
+[115/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.4604986351646208 at frame 203
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5652173913043478)
+[116/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.43726271825260593 at frame 204
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5689655172413793)
+[117/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_06/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.4491008611016913 at frame 210
+predicted classes: 	 [5]
+True classes :		 [5]
+Levenshtein Accuracy = 1.0 (0.5726495726495726)
+[118/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [6]
+Levenshtein Accuracy = 0 (0.5677966101694916)
+[119/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5380817761505153 at frame 227
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5714285714285714)
+[120/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.49401309893425255 at frame 174
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.575)
+[121/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 6 with prob : 0.6451701639100561 at frame 224
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5785123966942148)
+[122/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 6 with prob : 0.6358501204234724 at frame 208
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5819672131147541)
+[123/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.4070703705993225 at frame 204
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5853658536585366)
+[124/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.46856893735783317 at frame 201
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5887096774193549)
+[125/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.4539690746807974 at frame 224
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.592)
+[126/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [6]
+Levenshtein Accuracy = 0 (0.5873015873015873)
+[127/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [6]
+Levenshtein Accuracy = 0 (0.5826771653543307)
+[128/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [6]
+Levenshtein Accuracy = 0 (0.578125)
+[129/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5114166401764478 at frame 192
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5813953488372093)
+[130/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.42137279511785575 at frame 183
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5846153846153846)
+[131/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.21200188153108993 at frame 188
+predicted classes: 	 [19]
+True classes :		 [6]
+Levenshtein Accuracy = 0.0 (0.5801526717557252)
+[132/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5226671948477095 at frame 199
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5833333333333334)
+[133/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5997283572822031 at frame 213
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5864661654135338)
+[134/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [6]
+Levenshtein Accuracy = 0 (0.582089552238806)
+[135/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5923618220375553 at frame 205
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5851851851851851)
+[136/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.6140773262795028 at frame 202
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5882352941176471)
+[137/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_07/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.5284899036868758 at frame 204
+predicted classes: 	 [6]
+True classes :		 [6]
+Levenshtein Accuracy = 1.0 (0.5912408759124088)
+[138/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6159681796133216 at frame 182
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.5942028985507246)
+[139/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6168677290146424 at frame 185
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.5971223021582733)
+[140/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6163605900606612 at frame 186
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6)
+[141/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6744517955030851 at frame 220
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6028368794326241)
+[142/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.474544212740856 at frame 230
+predicted classes: 	 [6]
+True classes :		 [7]
+Levenshtein Accuracy = 0.0 (0.5985915492957746)
+[143/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.48819873458363044 at frame 238
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6013986013986014)
+[144/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.3829365710349992 at frame 153
+predicted classes: 	 [6]
+True classes :		 [7]
+Levenshtein Accuracy = 0.0 (0.5972222222222222)
+[145/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [7]
+Levenshtein Accuracy = 0 (0.593103448275862)
+[146/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [7]
+Levenshtein Accuracy = 0 (0.589041095890411)
+[147/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6294718415005032 at frame 210
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.5918367346938775)
+[148/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.48909070373209185 at frame 181
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.5945945945945946)
+[149/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.57355175471889 at frame 200
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.5973154362416108)
+[150/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.3779006374616586 at frame 185
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6)
+[151/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.4789315192937151 at frame 214
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6026490066225165)
+[152/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.46686110856514784 at frame 223
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6052631578947368)
+[153/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.4613935433128774 at frame 210
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6078431372549019)
+[154/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6235577205402217 at frame 186
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6103896103896104)
+[155/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6279151006657449 at frame 189
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6129032258064516)
+[156/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_08/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 7 with prob : 0.6372090491087787 at frame 196
+predicted classes: 	 [7]
+True classes :		 [7]
+Levenshtein Accuracy = 1.0 (0.6153846153846154)
+[157/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.2922931659317484 at frame 230
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6178343949044586)
+[158/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.6139240506329114)
+[159/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 8 with prob : 0.6603940193684847 at frame 204
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6163522012578616)
+[160/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.7019686764546754 at frame 218
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.61875)
+[161/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.6149068322981367)
+[162/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.6111111111111112)
+[163/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.5161606517534411 at frame 177
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6134969325153374)
+[164/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.3141117442735903 at frame 222
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6158536585365854)
+[165/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.3279920289561173 at frame 201
+predicted classes: 	 [12]
+True classes :		 [8]
+Levenshtein Accuracy = 0.0 (0.6121212121212121)
+[166/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.608433734939759)
+[167/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.6047904191616766)
+[168/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [8]
+Levenshtein Accuracy = 0 (0.6011904761904762)
+[169/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.27047540253780683 at frame 185
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6035502958579881)
+[170/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.3702409416343597 at frame 179
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6058823529411764)
+[171/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.26267209641685035 at frame 192
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6081871345029239)
+[172/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.5919233496114602 at frame 207
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6104651162790697)
+[173/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.6037816876004961 at frame 205
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6127167630057804)
+[174/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 8 with prob : 0.6948724718484023 at frame 207
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6149425287356322)
+[175/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.4138634169820734 at frame 193
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6171428571428571)
+[176/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.6332715682493609 at frame 202
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6193181818181818)
+[177/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_09/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.5896020465132907 at frame 201
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6214689265536724)
+[178/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.406266359206415 at frame 238
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6235955056179775)
+[179/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6201117318435754)
+[180/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.6202680431389944 at frame 211
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6222222222222222)
+[181/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5544479353801822 at frame 221
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6243093922651933)
+[182/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5348222777061098 at frame 228
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6263736263736264)
+[183/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6229508196721312)
+[184/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6195652173913043)
+[185/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.35891522078256255 at frame 221
+predicted classes: 	 [18]
+True classes :		 [9]
+Levenshtein Accuracy = 0.0 (0.6162162162162163)
+[186/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6129032258064516)
+[187/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6096256684491979)
+[188/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [9]
+Levenshtein Accuracy = 0 (0.6063829787234043)
+[189/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5216554966839503 at frame 183
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6084656084656085)
+[190/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5123861700970357 at frame 188
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6105263157894737)
+[191/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5607895495478831 at frame 185
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.612565445026178)
+[192/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.6271259190458514 at frame 214
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6145833333333334)
+[193/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 9 with prob : 0.661919120478574 at frame 191
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.616580310880829)
+[194/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 9 with prob : 0.6766548980829494 at frame 202
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6185567010309279)
+[195/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 9 with prob : 0.6633683282093576 at frame 201
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6205128205128205)
+[196/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_10/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.6202295168751312 at frame 195
+predicted classes: 	 [9]
+True classes :		 [9]
+Levenshtein Accuracy = 1.0 (0.6224489795918368)
+[197/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.6151434073349908 at frame 231
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6243654822335025)
+[198/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 10 with prob : 0.6264047672637894 at frame 213
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6262626262626263)
+[199/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6321578213163574 at frame 200
+predicted classes: 	 [13]
+True classes :		 [10]
+Levenshtein Accuracy = 0.0 (0.6231155778894473)
+[200/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5997484285546464 at frame 218
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.625)
+[201/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5010733391246863 at frame 228
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6268656716417911)
+[202/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [10]
+Levenshtein Accuracy = 0 (0.6237623762376238)
+[203/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5178151288947324 at frame 227
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.625615763546798)
+[204/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.46856045768672233 at frame 227
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6274509803921569)
+[205/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [10]
+Levenshtein Accuracy = 0 (0.624390243902439)
+[206/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 10 with prob : 0.6383815969253883 at frame 219
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6262135922330098)
+[207/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.2644309439181369 at frame 47
+Late Detected - class : 4 with prob : 0.47549861487169576 at frame 92
+Early Detected - class : 10 with prob : 0.6277362361308902 at frame 188
+predicted classes: 	 [19  4 10]
+True classes :		 [10]
+Levenshtein Accuracy = -1.0 (0.6183574879227053)
+[208/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5781040117549465 at frame 194
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6201923076923077)
+[209/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.34334872648585724 at frame 178
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6220095693779905)
+[210/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5674683791666859 at frame 196
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6238095238095238)
+[211/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.43704686404443804 at frame 212
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6255924170616114)
+[212/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 10 with prob : 0.6275148228459788 at frame 216
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6273584905660378)
+[213/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.34575460405204633 at frame 227
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6291079812206573)
+[214/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.4117121557026646 at frame 198
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6308411214953271)
+[215/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.5133759961019354 at frame 209
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6325581395348837)
+[216/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_11/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.4850975984044471 at frame 203
+predicted classes: 	 [10]
+True classes :		 [10]
+Levenshtein Accuracy = 1.0 (0.6342592592592593)
+[217/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6157372965813819 at frame 190
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6359447004608295)
+[218/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.652842990022827 at frame 239
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6376146788990825)
+[219/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [11]
+Levenshtein Accuracy = 0 (0.634703196347032)
+[220/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [11]
+Levenshtein Accuracy = 0 (0.6318181818181818)
+[221/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.47746898015577616 at frame 209
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6334841628959276)
+[222/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6389379875401648 at frame 214
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6351351351351351)
+[223/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6440240391759935 at frame 232
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6367713004484304)
+[224/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 4 with prob : 0.2395207554446304 at frame 79
+Early Detected - class : 11 with prob : 0.6299367483347528 at frame 236
+predicted classes: 	 [ 4 11]
+True classes :		 [11]
+Levenshtein Accuracy = 0.0 (0.6339285714285714)
+[225/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6468737073408544 at frame 233
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6355555555555555)
+[226/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6247263965219357 at frame 204
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6371681415929203)
+[227/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.5466730088697802 at frame 181
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6387665198237885)
+[228/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.5870404755877469 at frame 199
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6403508771929824)
+[229/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.49105529016876065 at frame 225
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6419213973799127)
+[230/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6289284566599831 at frame 206
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6434782608695652)
+[231/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6204719886600384 at frame 198
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.645021645021645)
+[232/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6636390405371103 at frame 207
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.646551724137931)
+[233/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6296930508850128 at frame 197
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.648068669527897)
+[234/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 11 with prob : 0.5080898832864786 at frame 195
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6495726495726496)
+[235/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_12/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 11 with prob : 0.6227017598906994 at frame 205
+predicted classes: 	 [11]
+True classes :		 [11]
+Levenshtein Accuracy = 1.0 (0.6510638297872341)
+[236/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 12 with prob : 0.6540464597386784 at frame 215
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.652542372881356)
+[237/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [12]
+Levenshtein Accuracy = 0 (0.6497890295358649)
+[238/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.6809842392592848 at frame 231
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6512605042016807)
+[239/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.662041088926337 at frame 235
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6527196652719666)
+[240/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 8 with prob : 0.39002272982115116 at frame 228
+predicted classes: 	 [8]
+True classes :		 [8]
+Levenshtein Accuracy = 1.0 (0.6541666666666667)
+[241/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.2238280720236392 at frame 143
+predicted classes: 	 [13]
+True classes :		 [12]
+Levenshtein Accuracy = 0.0 (0.6514522821576764)
+[242/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.5629318830328964 at frame 193
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6528925619834711)
+[243/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.5812913872515179 at frame 174
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.654320987654321)
+[244/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [12]
+Levenshtein Accuracy = 0 (0.6516393442622951)
+[245/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [12]
+Levenshtein Accuracy = 0 (0.6489795918367347)
+[246/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 12 with prob : 0.6621612713063556 at frame 215
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6504065040650406)
+[247/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.269843629988721 at frame 183
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6518218623481782)
+[248/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.5534581346482169 at frame 179
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6532258064516129)
+[249/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.4293650245277239 at frame 117
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6546184738955824)
+[250/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 12 with prob : 0.6699025780624004 at frame 202
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.656)
+[251/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.6505768907065616 at frame 206
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6573705179282868)
+[252/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [12]
+Levenshtein Accuracy = 0 (0.6547619047619048)
+[253/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.38615609202350704 at frame 194
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.6561264822134387)
+[254/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_13/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 12 with prob : 0.42587086901758164 at frame 193
+predicted classes: 	 [12]
+True classes :		 [12]
+Levenshtein Accuracy = 1.0 (0.65748031496063)
+[255/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6243292462653265 at frame 187
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6588235294117647)
+[256/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6209393015420901 at frame 196
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.66015625)
+[257/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6254545698934414 at frame 210
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6614785992217899)
+[258/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6224003777995089 at frame 206
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6627906976744186)
+[259/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6189795776674271 at frame 193
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6640926640926641)
+[260/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.5176377772022835 at frame 174
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6653846153846154)
+[261/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.5466387237547273 at frame 161
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[262/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.5171752033054772 at frame 169
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6679389312977099)
+[263/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [13]
+Levenshtein Accuracy = 0 (0.6653992395437263)
+[264/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [13]
+Levenshtein Accuracy = 0 (0.6628787878787878)
+[265/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [13]
+Levenshtein Accuracy = 0 (0.660377358490566)
+[266/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.576945001742681 at frame 187
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6616541353383458)
+[267/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.5507641753709196 at frame 193
+predicted classes: 	 [14]
+True classes :		 [13]
+Levenshtein Accuracy = 0.0 (0.6591760299625468)
+[268/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.37775401170596273 at frame 188
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6604477611940298)
+[269/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.6322938772452825 at frame 221
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6617100371747212)
+[270/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.6456286616841308 at frame 197
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.662962962962963)
+[271/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 13 with prob : 0.62879689319957 at frame 199
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6642066420664207)
+[272/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.6237518256716423 at frame 193
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6654411764705882)
+[273/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.5659136959841028 at frame 200
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[274/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_14/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.6067395201183876 at frame 187
+predicted classes: 	 [13]
+True classes :		 [13]
+Levenshtein Accuracy = 1.0 (0.6678832116788321)
+[275/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6275799068931821 at frame 197
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6690909090909091)
+[276/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6172913943744449 at frame 201
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6702898550724637)
+[277/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6320364238855493 at frame 216
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6714801444043321)
+[278/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6179543924467749 at frame 204
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6726618705035972)
+[279/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.616779003460691 at frame 213
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6738351254480287)
+[280/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.16877828618554994 at frame 65
+Late Detected - class : 14 with prob : 0.504983279264837 at frame 222
+predicted classes: 	 [ 2 14]
+True classes :		 [14]
+Levenshtein Accuracy = 0.0 (0.6714285714285714)
+[281/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6207506824116937 at frame 216
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6725978647686833)
+[282/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.5699327295709968 at frame 190
+predicted classes: 	 [13]
+True classes :		 [14]
+Levenshtein Accuracy = 0.0 (0.6702127659574468)
+[283/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.5920115422397425 at frame 180
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6713780918727915)
+[284/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.5801496665168207 at frame 184
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6725352112676056)
+[285/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6145486613991766 at frame 183
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6736842105263158)
+[286/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6108087406436798 at frame 180
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6748251748251748)
+[287/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.500080588514084 at frame 228
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6759581881533101)
+[288/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 14 with prob : 0.6189785765929284 at frame 191
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6770833333333334)
+[289/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.6168535084406528 at frame 212
+predicted classes: 	 [13]
+True classes :		 [14]
+Levenshtein Accuracy = 0.0 (0.6747404844290658)
+[290/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_15/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.6179896838707748 at frame 205
+predicted classes: 	 [14]
+True classes :		 [14]
+Levenshtein Accuracy = 1.0 (0.6758620689655173)
+[291/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [15]
+Levenshtein Accuracy = 0 (0.6735395189003437)
+[292/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 15 with prob : 0.6528365689365243 at frame 216
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6746575342465754)
+[293/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5803134840497239 at frame 215
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6757679180887372)
+[294/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.6075282873064973 at frame 225
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6768707482993197)
+[295/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5606870367942536 at frame 232
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6779661016949152)
+[296/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.6174909716186036 at frame 235
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6790540540540541)
+[297/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5257380352025185 at frame 199
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6801346801346801)
+[298/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.23274711767300374 at frame 48
+predicted classes: 	 [2]
+True classes :		 [15]
+Levenshtein Accuracy = 0.0 (0.6778523489932886)
+[299/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [15]
+Levenshtein Accuracy = 0 (0.6755852842809364)
+[300/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [15]
+Levenshtein Accuracy = 0 (0.6733333333333333)
+[301/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5617020651033531 at frame 112
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6744186046511628)
+[302/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.34745865227756995 at frame 190
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6754966887417219)
+[303/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [15]
+Levenshtein Accuracy = 0 (0.6732673267326733)
+[304/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5442930462184128 at frame 208
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6743421052631579)
+[305/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.2598543754613664 at frame 80
+Late Detected - class : 15 with prob : 0.472136071136688 at frame 195
+predicted classes: 	 [16 15]
+True classes :		 [15]
+Levenshtein Accuracy = 0.0 (0.6721311475409836)
+[306/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.5422788730543382 at frame 200
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.673202614379085)
+[307/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.2923198301329337 at frame 201
+predicted classes: 	 [15]
+True classes :		 [15]
+Levenshtein Accuracy = 1.0 (0.6742671009771987)
+[308/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.24981686577613957 at frame 196
+predicted classes: 	 [6]
+True classes :		 [15]
+Levenshtein Accuracy = 0.0 (0.672077922077922)
+[309/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_16/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 6 with prob : 0.16089123446037448 at frame 193
+predicted classes: 	 [6]
+True classes :		 [15]
+Levenshtein Accuracy = 0.0 (0.6699029126213593)
+[310/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.667741935483871)
+[311/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.6655948553054662)
+[312/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.5850936066401798 at frame 214
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[313/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.6645367412140575)
+[314/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.6624203821656051)
+[315/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.5064954284086023 at frame 233
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6634920634920635)
+[316/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.6613924050632911)
+[317/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.4172181913031538 at frame 234
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6624605678233438)
+[318/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [16]
+Levenshtein Accuracy = 0 (0.660377358490566)
+[319/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.15713080445615232 at frame 44
+predicted classes: 	 [2]
+True classes :		 [16]
+Levenshtein Accuracy = 0.0 (0.658307210031348)
+[320/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.16488538611936712 at frame 51
+predicted classes: 	 [20]
+True classes :		 [16]
+Levenshtein Accuracy = 0.0 (0.65625)
+[321/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.28833255228912114 at frame 194
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6573208722741433)
+[322/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.2796856426859273 at frame 187
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6583850931677019)
+[323/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.23762034928030185 at frame 185
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6594427244582043)
+[324/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.6392167872466097 at frame 192
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6604938271604939)
+[325/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.29332296952918024 at frame 177
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6615384615384615)
+[326/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 16 with prob : 0.6658492693316826 at frame 203
+predicted classes: 	 [16]
+True classes :		 [16]
+Levenshtein Accuracy = 1.0 (0.6625766871165644)
+[327/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.33111993286442387 at frame 188
+predicted classes: 	 [3]
+True classes :		 [16]
+Levenshtein Accuracy = 0.0 (0.6605504587155964)
+[328/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.3875680515183057 at frame 204
+predicted classes: 	 [3]
+True classes :		 [16]
+Levenshtein Accuracy = 0.0 (0.6585365853658537)
+[329/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_17/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.3585928615804564 at frame 214
+predicted classes: 	 [7]
+True classes :		 [16]
+Levenshtein Accuracy = 0.0 (0.6565349544072948)
+[330/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [17]
+Levenshtein Accuracy = 0 (0.6545454545454545)
+[331/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6657559768491312 at frame 234
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6555891238670695)
+[332/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6121153174403045 at frame 197
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6566265060240963)
+[333/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6322941927066319 at frame 203
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6576576576576577)
+[334/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6484598030222827 at frame 235
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6586826347305389)
+[335/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6491959081820823 at frame 151
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6597014925373135)
+[336/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.5557899079479465 at frame 227
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6607142857142857)
+[337/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.44124077298541625 at frame 229
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6617210682492581)
+[338/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6440897054743246 at frame 219
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6627218934911243)
+[339/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6428113735687035 at frame 208
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6637168141592921)
+[340/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.2794805644260925 at frame 187
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6647058823529411)
+[341/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [17]
+Levenshtein Accuracy = 0 (0.6627565982404692)
+[342/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.41515146669428954 at frame 190
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6637426900584795)
+[343/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6548890260797986 at frame 197
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6647230320699709)
+[344/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 17 with prob : 0.6207702854747332 at frame 214
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6656976744186046)
+[345/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 17 with prob : 0.6206065315331488 at frame 191
+predicted classes: 	 [17]
+True classes :		 [17]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[346/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.18083673702604044 at frame 218
+predicted classes: 	 [5]
+True classes :		 [17]
+Levenshtein Accuracy = 0.0 (0.6647398843930635)
+[347/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [17]
+Levenshtein Accuracy = 0 (0.6628242074927954)
+[348/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_18/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 16 with prob : 0.3079899144132916 at frame 205
+predicted classes: 	 [16]
+True classes :		 [17]
+Levenshtein Accuracy = 0.0 (0.6609195402298851)
+[349/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [18]
+Levenshtein Accuracy = 0 (0.6590257879656161)
+[350/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.4901995687899762 at frame 234
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.66)
+[351/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.6804634209878733 at frame 202
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6609686609686609)
+[352/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 18 with prob : 0.6847412494469128 at frame 210
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6619318181818182)
+[353/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 18 with prob : 0.7030586726378705 at frame 227
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6628895184135978)
+[354/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.4380257492873604 at frame 183
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6638418079096046)
+[355/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.5653885663744722 at frame 186
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6647887323943662)
+[356/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [18]
+Levenshtein Accuracy = 0 (0.6629213483146067)
+[357/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 18 with prob : 0.6396856669672085 at frame 222
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6638655462184874)
+[358/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [18]
+Levenshtein Accuracy = 0 (0.6620111731843575)
+[359/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.5409823778779133 at frame 187
+predicted classes: 	 [9]
+True classes :		 [18]
+Levenshtein Accuracy = 0.0 (0.6601671309192201)
+[360/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.3758836187639781 at frame 187
+predicted classes: 	 [9]
+True classes :		 [18]
+Levenshtein Accuracy = 0.0 (0.6583333333333333)
+[361/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.4165236744324639 at frame 221
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6592797783933518)
+[362/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.4764722415264047 at frame 203
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6602209944751382)
+[363/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 9 with prob : 0.4682328884316006 at frame 218
+predicted classes: 	 [9]
+True classes :		 [18]
+Levenshtein Accuracy = 0.0 (0.6584022038567493)
+[364/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.3626781057125692 at frame 175
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6593406593406593)
+[365/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.41247062361564485 at frame 210
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6602739726027397)
+[366/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.2098404597288198 at frame 198
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.6612021857923497)
+[367/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_19/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 18 with prob : 0.3005024555812294 at frame 206
+predicted classes: 	 [18]
+True classes :		 [18]
+Levenshtein Accuracy = 1.0 (0.662125340599455)
+[368/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 19 with prob : 0.6384597150752789 at frame 205
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6630434782608695)
+[369/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 19 with prob : 0.6319842497670207 at frame 216
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6639566395663956)
+[370/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5950237097813174 at frame 234
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6648648648648648)
+[371/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [19]
+Levenshtein Accuracy = 0 (0.6630727762803235)
+[372/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 15 with prob : 0.2933149846501136 at frame 119
+predicted classes: 	 [15]
+True classes :		 [19]
+Levenshtein Accuracy = 0.0 (0.6612903225806451)
+[373/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [19]
+Levenshtein Accuracy = 0 (0.6595174262734584)
+[374/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 19 with prob : 0.624013504352395 at frame 197
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.660427807486631)
+[375/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.537651533473552 at frame 220
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6613333333333333)
+[376/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.3901598013327889 at frame 51
+Early Detected - class : 19 with prob : 0.6298678330901614 at frame 225
+predicted classes: 	 [14 19]
+True classes :		 [19]
+Levenshtein Accuracy = 0.0 (0.6595744680851063)
+[377/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 19 with prob : 0.6298979189772848 at frame 225
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6604774535809018)
+[378/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [19]
+Levenshtein Accuracy = 0 (0.6587301587301587)
+[379/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.29698803937900514 at frame 174
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6596306068601583)
+[380/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.37629778872622277 at frame 227
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6605263157894737)
+[381/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5722845651515998 at frame 205
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6614173228346457)
+[382/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.38778362746844247 at frame 213
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.662303664921466)
+[383/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5241131007445173 at frame 208
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6631853785900783)
+[384/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5291480777676533 at frame 215
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6640625)
+[385/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_20/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.5838262697451738 at frame 214
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6649350649350649)
+[386/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [20]
+Levenshtein Accuracy = 0 (0.6632124352331606)
+[387/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.620315000501364 at frame 218
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6640826873385013)
+[388/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5312226538620893 at frame 217
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6649484536082474)
+[389/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [20]
+Levenshtein Accuracy = 0 (0.6632390745501285)
+[390/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5351608752690815 at frame 231
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6641025641025641)
+[391/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.46800494011323696 at frame 211
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6649616368286445)
+[392/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.535651503742187 at frame 170
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6658163265306123)
+[393/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.602108241156216 at frame 234
+predicted classes: 	 [19]
+True classes :		 [19]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[394/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 2 with prob : 0.3364442678267672 at frame 62
+Early Detected - class : 19 with prob : 0.6237805308400988 at frame 227
+predicted classes: 	 [ 2 19]
+True classes :		 [19]
+Levenshtein Accuracy = 0.0 (0.6649746192893401)
+[395/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [20]
+Levenshtein Accuracy = 0 (0.6632911392405063)
+[396/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 20 with prob : 0.6221717563327245 at frame 214
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6641414141414141)
+[397/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5751099008591808 at frame 192
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6649874055415617)
+[398/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 20 with prob : 0.6229464715375355 at frame 193
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6658291457286433)
+[399/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5607741927746255 at frame 196
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[400/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5245578042405579 at frame 216
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6675)
+[401/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5332894902052346 at frame 211
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6683291770573566)
+[402/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5681236237549208 at frame 218
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6691542288557214)
+[403/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_21/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 20 with prob : 0.5752437644513941 at frame 212
+predicted classes: 	 [20]
+True classes :		 [20]
+Levenshtein Accuracy = 1.0 (0.6699751861042184)
+[404/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [21]
+Levenshtein Accuracy = 0 (0.6683168316831684)
+[405/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [21]
+Levenshtein Accuracy = 0 (0.6666666666666666)
+[406/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject13_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [21]
+Levenshtein Accuracy = 0 (0.6650246305418719)
+[407/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 21 with prob : 0.6096688543528053 at frame 190
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6658476658476659)
+[408/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 21 with prob : 0.6430464167176302 at frame 224
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[409/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 21 with prob : 0.6311922869622943 at frame 226
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6674816625916871)
+[410/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.3576984400678305 at frame 170
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6682926829268293)
+[411/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.5256112593993882 at frame 215
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6690997566909975)
+[412/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 13 with prob : 0.31903937205825494 at frame 215
+predicted classes: 	 [13]
+True classes :		 [21]
+Levenshtein Accuracy = 0.0 (0.6674757281553398)
+[413/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [21]
+Levenshtein Accuracy = 0 (0.6658595641646489)
+[414/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 21 with prob : 0.6286816088779044 at frame 238
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[415/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 3 with prob : 0.19655394703207094 at frame 47
+Early Detected - class : 21 with prob : 0.63891718104153 at frame 230
+predicted classes: 	 [ 3 21]
+True classes :		 [21]
+Levenshtein Accuracy = 0.0 (0.6650602409638554)
+[416/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 7 with prob : 0.34497704032365134 at frame 196
+predicted classes: 	 [7]
+True classes :		 [21]
+Levenshtein Accuracy = 0.0 (0.6634615384615384)
+[417/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.5881705111616811 at frame 224
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6642685851318945)
+[418/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.5704486099219558 at frame 203
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6650717703349283)
+[419/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 5 with prob : 0.17376798290992784 at frame 204
+predicted classes: 	 [5]
+True classes :		 [21]
+Levenshtein Accuracy = 0.0 (0.6634844868735084)
+[420/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.5752553839933792 at frame 212
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.6642857142857143)
+[421/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_22/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 21 with prob : 0.553028944211323 at frame 184
+predicted classes: 	 [21]
+True classes :		 [21]
+Levenshtein Accuracy = 1.0 (0.665083135391924)
+[422/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [22]
+Levenshtein Accuracy = 0 (0.6635071090047393)
+[423/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.6741625776839854 at frame 231
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6643026004728132)
+[424/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.5513301340239103 at frame 239
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6650943396226415)
+[425/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.45081866949284416 at frame 223
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6658823529411765)
+[426/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.4329020094090634 at frame 216
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[427/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.3844866115437107 at frame 170
+Late Detected - class : 10 with prob : 0.336940048598004 at frame 236
+predicted classes: 	 [22 10]
+True classes :		 [22]
+Levenshtein Accuracy = 0.0 (0.6651053864168618)
+[428/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.3788846298116212 at frame 226
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6658878504672897)
+[429/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [22]
+Levenshtein Accuracy = 0 (0.6643356643356644)
+[430/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [22]
+Levenshtein Accuracy = 0 (0.6627906976744186)
+[431/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 10 with prob : 0.6646742042057692 at frame 100
+predicted classes: 	 [10]
+True classes :		 [22]
+Levenshtein Accuracy = 0.0 (0.6612529002320185)
+[432/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.20544699596573818 at frame 45
+predicted classes: 	 [14]
+True classes :		 [22]
+Levenshtein Accuracy = 0.0 (0.6597222222222222)
+[433/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.6085530438607222 at frame 184
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6605080831408776)
+[434/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.5852837366656075 at frame 186
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6612903225806451)
+[435/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.5847988872801734 at frame 190
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6620689655172414)
+[436/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 22 with prob : 0.623864532230469 at frame 187
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6628440366972477)
+[437/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [22]
+Levenshtein Accuracy = 0 (0.6613272311212814)
+[438/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 22 with prob : 0.621885520500866 at frame 186
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6621004566210046)
+[439/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.6066617035412005 at frame 209
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.662870159453303)
+[440/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 22 with prob : 0.6096414215090807 at frame 188
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6636363636363637)
+[441/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_23/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 22 with prob : 0.41924865262034317 at frame 219
+predicted classes: 	 [22]
+True classes :		 [22]
+Levenshtein Accuracy = 1.0 (0.6643990929705216)
+[442/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.620792167413658 at frame 200
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.665158371040724)
+[443/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6125337961940773 at frame 184
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6659142212189616)
+[444/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6148995035325174 at frame 219
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[445/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6120365806492833 at frame 201
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6674157303370787)
+[446/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [23]
+Levenshtein Accuracy = 0 (0.6659192825112108)
+[447/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 23 with prob : 0.6265525019430151 at frame 202
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[448/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6386525315571072 at frame 220
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6674107142857143)
+[449/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [23]
+Levenshtein Accuracy = 0 (0.6659242761692651)
+[450/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [23]
+Levenshtein Accuracy = 0 (0.6644444444444444)
+[451/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 19 with prob : 0.27901744108359156 at frame 58
+Early Detected - class : 23 with prob : 0.6150658546603226 at frame 196
+predicted classes: 	 [19 23]
+True classes :		 [23]
+Levenshtein Accuracy = 0.0 (0.6629711751662971)
+[452/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6166294952184002 at frame 191
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6637168141592921)
+[453/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject14_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 23 with prob : 0.4867840848977775 at frame 178
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6644591611479028)
+[454/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject14_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 23 with prob : 0.4761829340219246 at frame 181
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6651982378854625)
+[455/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6069683168916545 at frame 173
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6659340659340659)
+[456/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6113498461352396 at frame 181
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6666666666666666)
+[457/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6131120513309911 at frame 190
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6673960612691466)
+[458/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6064705621632144 at frame 184
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6681222707423581)
+[459/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6062558262778972 at frame 181
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6688453159041394)
+[460/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_24/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 23 with prob : 0.6064736491617049 at frame 181
+predicted classes: 	 [23]
+True classes :		 [23]
+Levenshtein Accuracy = 1.0 (0.6695652173913044)
+[461/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject13_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6074256704352469 at frame 182
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6702819956616052)
+[462/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject13_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.607679652207109 at frame 179
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.670995670995671)
+[463/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject8_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 24 with prob : 0.5689369813273555 at frame 220
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.67170626349892)
+[464/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject8_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 14 with prob : 0.31953415205401964 at frame 236
+predicted classes: 	 [14]
+True classes :		 [24]
+Levenshtein Accuracy = 0.0 (0.6702586206896551)
+[465/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject8_r2/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [24]
+Levenshtein Accuracy = 0 (0.6688172043010753)
+[466/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r3/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 24 with prob : 0.5459035868142144 at frame 184
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6695278969957081)
+[467/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r4/sk_depth_all
+[INFO]: Videot  is loading...
+predicted classes: 	 None
+True classes :		 [24]
+Levenshtein Accuracy = 0 (0.6680942184154176)
+[468/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r5/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 24 with prob : 0.5215015126990659 at frame 238
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6688034188034188)
+[469/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6410187381696061 at frame 213
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6695095948827292)
+[470/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6304676014407062 at frame 197
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6702127659574468)
+[471/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject20_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6317668053119416 at frame 216
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6709129511677282)
+[472/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject14_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 24 with prob : 0.6055069960711904 at frame 190
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6716101694915254)
+[473/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject5_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.614396428673155 at frame 191
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6723044397463002)
+[474/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject5_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6107527670632226 at frame 167
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6729957805907173)
+[475/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject5_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Early Detected - class : 24 with prob : 0.6112372342244738 at frame 186
+predicted classes: 	 [24]
+True classes :		 [24]
+Levenshtein Accuracy = 1.0 (0.6736842105263158)
+[476/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject9_r0/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 10 with prob : 0.3546942946659986 at frame 206
+predicted classes: 	 [10]
+True classes :		 [24]
+Levenshtein Accuracy = 0.0 (0.6722689075630253)
+[477/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject9_r1/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 0 with prob : 0.3150023255428328 at frame 207
+predicted classes: 	 [0]
+True classes :		 [24]
+Levenshtein Accuracy = 0.0 (0.6708595387840671)
+[478/482]============
+/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_25/subject9_r2/sk_depth_all
+[INFO]: Videot  is loading...
+Late Detected - class : 1 with prob : 0.3513469961920687 at frame 204
+predicted classes: 	 [1]
+True classes :		 [24]
+Levenshtein Accuracy = 0.0 (0.6694560669456067)
+Average Levenshtein Accuracy= 0.6694560669456067
+-----Evaluation is finished------

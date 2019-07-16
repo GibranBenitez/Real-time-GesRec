@@ -1,4 +1,4 @@
-from datasets.jester import Jester
+# from datasets.jester import Jester
 from datasets.egogesture import EgoGesture
 from datasets.nv import NV
 from datasets.egogesture_online import EgoGestureOnline

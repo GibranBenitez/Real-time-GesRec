@@ -166,8 +166,10 @@ elif opt.dataset == 'nv':
     df = pd.read_csv(os.path.join(opt.video_path,'nvgesture_test_correct_cvpr2016_v2.lst'), delimiter = ' ', header = None)
     test_paths = []
     for x in df[0].values:
-        test_paths.append(os.path.join(opt.video_path, x.replace('path:', ''), 'sk_color_all'))
-
+        if opt.modality_det == 'RGB':
+            test_paths.append(os.path.join(opt.video_path, x.replace('path:', ''), 'sk_color_all'))
+        elif opt.modality_det == 'Depth':
+            test_paths.append(os.path.join(opt.video_path, x.replace('path:', ''), 'sk_depth_all'))
 
 
 print('Start Evaluation')
@@ -180,7 +182,7 @@ for path in test_paths[4:]:
     if opt.dataset == 'egogesture':
         opt.whole_path = path.split(os.sep, 4)[-1]
     elif opt.dataset == 'nv':
-        opt.whole_path = path.split(os.sep, 3)[-1]
+        opt.whole_path = path.split(os.sep, 6)[-1]
     
     videoidx += 1
     active_index = 0
@@ -350,22 +352,28 @@ for path in test_paths[4:]:
                 true_classes.append(int(row[0])-1)
     elif opt.dataset == 'nv':
         true_classes = []
-        with open('./annotation_nvGesture/vallistall.txt') as csvfile:
+        with open('../annotation_nvGesture/vallistall.txt') as csvfile:
             readCSV = csv.reader(csvfile, delimiter=' ')
             for row in readCSV:
                 if row[0] == opt.whole_path:
                     if row[1] != '26' :
                         true_classes.append(int(row[1])-1)
     
-    predicted = np.array(results)[:,1]
-    
+    # if path == '/misc/dl001/dataset/NVIDIA/nvgesture_arch/./Video_data/class_02/subject13_r1/sk_depth_all':
+    #     pdb.set_trace()
+
     true_classes = np.array(true_classes)
-    levenshtein_distance = LevenshteinDistance(true_classes, predicted)
-    levenshtein_accuracy = 1-(levenshtein_distance/len(true_classes))
-    if levenshtein_distance <0: # Distance cannot be less than 0
-        levenshtein_accuracies.update(0, len(true_classes))
+    if results == []:
+        predicted = 'NONE'
+        # levenshtein_accuracies.update(0, len(true_classes))
     else:
-        levenshtein_accuracies.update(levenshtein_accuracy, len(true_classes))
+        predicted = np.array(results)[:,1]
+        levenshtein_distance = LevenshteinDistance(true_classes, predicted)
+        levenshtein_accuracy = 1-(levenshtein_distance/len(true_classes))
+        if levenshtein_distance <0: # Distance cannot be less than 0
+            levenshtein_accuracies.update(0, len(true_classes))
+        else:
+            levenshtein_accuracies.update(levenshtein_accuracy, len(true_classes))
 
     
     print('predicted classes: \t',predicted)
